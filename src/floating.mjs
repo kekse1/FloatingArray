@@ -146,17 +146,25 @@ class FloatingArray extends Array
 				return undefined;
 			}
 
-			const	[ index, float ] = this.
+			var	[ index, float ] = this.
 					getParameter(_property);
 
 			if(!float)
 			{
 				return _target[index];
 			}
-			
-			var	next = (negative ?
-					(index - 1) :
-					(index + 1));
+
+			var	next;
+
+			if(negative)
+			{
+				float = (1 - float);
+				next = (index - 1);
+			}
+			else
+			{
+				next = (index + 1);
+			}
 
 			if(next < 0)
 			{
