@@ -11,7 +11,7 @@ import helper from './helper.mjs';
 
 //
 const ROUND = 2;
-const TEST = 8;
+const TEST = 6;
 const MAX = 255;
 const MIN = 0;
 
@@ -25,7 +25,7 @@ for(var i = 0; i < array.length; ++i)
 	array[i] = ((Math.floor(Math.random() * (MAX - MIN + 1)) + MIN) || 0);
 }
 
-console.dir({array});
+console.dir({array}, {compact:false});
 
 for(var i = 0; i < TEST; ++i)
 {
@@ -34,7 +34,8 @@ for(var i = 0; i < TEST; ++i)
 
 	console.dir({ int, float,
 		INT: array[int],
-		FLOAT: array[float] });
+		FLOAT: array[float] },
+			{ compact: false });
 	console.log();
 }
 
