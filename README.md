@@ -4,6 +4,36 @@
 # **`FloatingArray`**
 **TODO**
 
+<br><br>
+
+> [!NOTE]
+> [PropJockey](https://github.com/propjockey/) had exactly the same idea as me.
+> I really didn't steal this idea from her - when it came up to my mind, I have
+> never seen it somewhere else before! :-)
+> So, please also look at < https://github.com/propjockey/analog-array/ >.
+
+<br><br>
+
+# TODO
+This documentation is still TODO. The implementation is nearly ready: the numeric
+part is finished now, the `Proxy` part is still TODO.. easy going.
+
+<br><br>
+
+# Idea and Description
+**TODO**
+
+<br><br>
+
+# Download
+* [**`floating.mjs`**](./src/floating.mjs) (TODO, a little bit)
+
+* [`test.js`](./src/test.js) (TODO)
+* [`test.numeric.js`](./src/test.numeric.js) (DONE)
+
+# TODO
+...
+
 <br><br><br>
 
 # Contact
