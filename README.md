@@ -26,7 +26,7 @@ part is finished now, the `Proxy` part is still TODO.. easy going.
 <br><br>
 
 # Download
-* [**`floating.mjs`**](./src/floating.mjs), v**0.2.1** (updated \[2026-10-15\]);
+* [**`floating.mjs`**](./src/floating.mjs), v**0.2.2** (updated **2026-10-15**);
 
 <br>
 

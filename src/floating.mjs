@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
  * https://kekse.biz/ https://github.com/kekse1/
- * v0.2.1
+ * v0.2.2
  */
 
 /*
@@ -117,14 +117,14 @@ class FloatingArray extends Array
 				return _target[_property];
 			}
 
-			if(_target.length === 0)
-			{
-				return undefined;
-			}
-			
 			if(!this.isNumber(_property, _target.radix, this.THROW))
 			{
 				return _target[_property];
+			}
+
+			if(_target.length === 0)
+			{
+				return undefined;
 			}
 			
 			_property = _target.parseNumber(_property);
