@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
  * https://kekse.biz/ https://github.com/kekse1/
- * v0.2.0
+ * v0.2.1
  */
 
 /*
@@ -160,6 +160,17 @@ class FloatingArray extends Array
 			else if(next >= _target.length)
 			{
 				next = 0;
+			}
+
+			if(!Number.isFinite(_target[index]) ||
+					!Number.isFinite(_target[next]))
+			{
+				if(this.THROW)
+				{
+					throw new Error('At least one array element is no finite number');
+				}
+				
+				return _target[index];
 			}
 
 			return this.getValue(

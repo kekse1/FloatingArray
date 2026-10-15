@@ -11,7 +11,7 @@ import helper from './helper.mjs';
 
 //
 const ROUND = 2;
-const TEST = 6;
+const TEST = 8;
 const MAX = 255;
 const MIN = 0;
 
@@ -31,6 +31,16 @@ for(var i = 0; i < TEST; ++i)
 {
 	int = helper.random.int(array.length);
 	float = helper.random.float(array.length);
+
+	if(Math.random() >= 0.5)
+	{
+		int = -int;
+	}
+
+	if(Math.random() >= 0.5)
+	{
+		float = -float;
+	}
 
 	console.dir({ int, float,
 		INT: array[int],
