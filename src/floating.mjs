@@ -116,6 +116,11 @@ class FloatingArray extends Array
 			{
 				return _target[_property];
 			}
+
+			if(_target.length === 0)
+			{
+				return undefined;
+			}
 			
 			if(!this.isNumber(_property, _target.radix, this.THROW))
 			{
@@ -163,7 +168,7 @@ class FloatingArray extends Array
 			}
 
 			if(!Number.isFinite(_target[index]) ||
-					!Number.isFinite(_target[next]))
+				!Number.isFinite(_target[next]))
 			{
 				if(this.THROW)
 				{
