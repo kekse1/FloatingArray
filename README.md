@@ -25,8 +25,7 @@ part is finished now, the `Proxy` part is still TODO.. easy going.
 
 # Download
 * [**`floating.mjs`**](./src/floating.mjs) (TODO, a little bit)
-
-
+<br>
 * [`test.js`](./src/test.js) (TODO)
 * [`test.numeric.js`](./src/test.numeric.js) (DONE)
 
