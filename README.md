@@ -8,8 +8,8 @@
 
 > [!NOTE]
 > [PropJockey](https://github.com/propjockey/) had exactly the same idea as me.
-> I really didn't steal this idea from her - when it came up to my mind, I have
-> never seen it somewhere else before! :-)
+> I really didn't steal this idea from her - when it came up to my mind,
+> I had never seen it somewhere else before! :-)
 > So, please also look at < https://github.com/propjockey/analog-array/ >.
 
 <br><br>
