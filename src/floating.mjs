@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
  * https://kekse.biz/ https://github.com/kekse1/
- * v0.1.2
+ * v0.2.0
  */
 
 /*
@@ -22,6 +22,14 @@
  *
  *		< https://kekse.biz/ >
  *		< https://github.com/kekse1/ >
+ *
+ */
+
+/*
+ * TODO *
+ *
+ * # WICHTIG: `set()`-proxy-trap!!!! also setzen von werten mitsamt floating point index!!1
+ *	dazu: 'set' ergaenzen in 'proxyTraps[]'!.
  *
  */
 
@@ -79,7 +87,6 @@ class FloatingArray extends Array
 
 	static getProxyTraps(_this)
 	{
-throw new Error('TODO');
 		//
 		const result = {};
 
@@ -109,9 +116,56 @@ throw new Error('TODO');
 			{
 				return _target[_property];
 			}
+			
+			if(!this.isNumber(_property, _target.radix, this.THROW))
+			{
+				return _target[_property];
+			}
+			
+			_property = _target.parseNumber(_property);
+			
+			const	negative = (_property < 0);
+			
+			if(_target.index)
+			{
+				_property = this.getIndex(
+					_property,
+					_target.length);
+			}
+			else if(_property < 0)
+			{
+				return undefined;
+			}
+			else if(_property >= _target.length)
+			{
+				return undefined;
+			}
 
-throw new Error('TODO');
-			return _target[_property];
+			const	[ index, float ] = this.
+					getParameter(_property);
+
+			if(!float)
+			{
+				return _target[index];
+			}
+			
+			var	next = (negative ?
+					(index - 1) :
+					(index + 1));
+
+			if(next < 0)
+			{
+				next = (_target.length - 1);
+			}
+			else if(next >= _target.length)
+			{
+				next = 0;
+			}
+
+			return this.getValue(
+				_target[index],
+				_target[next],
+				float);
 		};
 
 		result.getOwnPropertyDescriptor = () => {
@@ -168,23 +222,18 @@ throw new Error('TODO');
 	static get proxyTraps()
 	{
 		return [
-			'get',
-			'set'
+			'get'
 		];
-	}
-
-	static getNumber(_property)
-	{
-		return null;
 	}
 	
 	static getParameter(_index)
 	{
 		const negative = (_index < 0);
-		const index = Math.abs(Math.trunc(_index));
-		const float = (_index % 1);
+		_index = Math.abs(_index);
+		const floating = (_index % 1);
+		_index = Math.trunc(_index);
 		
-		return [ index, float, negative ];
+		return [ _index, floating, negative ];
 	}
 	
 	get index()
@@ -554,6 +603,11 @@ throw new Error('TODO');
 		return [ _string, negative ];
 	}
 
+	static getValue(_a, _b, _factor)
+	{
+		return ((((_b - _a) * _factor) + _a) || 0);
+	}
+	
 	static getIndex(_index, _length)
 	{
 		if(_length < 1)

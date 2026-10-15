@@ -16,6 +16,8 @@ So, please also look at < https://github.com/propjockey/analog-array/ >.
 This documentation is still TODO. The implementation is nearly ready: the numeric
 part is finished now, the `Proxy` part is still TODO.. easy going.
 
+[**Update**] SEEMS to work. Still a bit TODO. I HAVE TO TEST THE `get()` now!!1
+
 <br><br>
 
 # Idea and Description
@@ -24,7 +26,7 @@ part is finished now, the `Proxy` part is still TODO.. easy going.
 <br><br>
 
 # Download
-* [**`floating.mjs`**](./src/floating.mjs) (TODO, a little bit)
+* [**`floating.mjs`**](./src/floating.mjs), v**0.2.0** \[2026-10-15\];
 
 <br>
 
