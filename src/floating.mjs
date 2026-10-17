@@ -37,8 +37,8 @@ class FloatingArray extends Array
 		{
 			if(typeof _args[i] === 'object' && _args[i] !== null)
 			{
-				options = Object.assign(options,
-					_args.splice(i--, 1)[0]);
+				Object.assign(options, _args.
+					splice(i--, 1)[0]);
 			}
 		}
 		
