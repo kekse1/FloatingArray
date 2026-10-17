@@ -132,8 +132,7 @@ class FloatingArray extends Array
 				next = 0;
 			}
 
-			if(!Number.isFinite(_target[index]) ||
-				!Number.isFinite(_target[next]))
+			if(!Number.isFinite(_target[index]) || !Number.isFinite(_target[next]))
 			{
 				if(_target.throw)
 				{
@@ -556,7 +555,7 @@ class FloatingArray extends Array
 
 	static getValue(_a, _b, _factor)
 	{
-		return ((((_b - _a) * _factor) + _a) || 0);
+		return ((((_a - _b) * _factor) + _b) || 0);
 	}
 	
 	static getIndex(_index, _length)
