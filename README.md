@@ -21,10 +21,8 @@ So, please also look at < https://github.com/propjockey/analog-array/ >.
 <br><br>
 
 # TODO
-This documentation is still TODO. The implementation is nearly ready: the numeric
-part is finished now, the `Proxy` part is still TODO.. easy going.
-
-[**Update**] SEEMS to work. Still a bit TODO. I HAVE TO TEST THE `get()` now!!1
+Most parts should work. But I still have to test if my calculations
+are correct. And here should be some tiny documentation, too.
 
 <br><br>
 
