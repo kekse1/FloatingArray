@@ -17,7 +17,7 @@ const
 
 //
 const	array = new FloatingArray(COUNT);
-var	float, int
+var	float, curr, next;
 
 for(var i = 0; i < array.length; ++i)
 {
@@ -30,23 +30,22 @@ console.dir(
 
 for(var i = 0; i < TEST; ++i)
 {
-	int = helper.random.int(array.length - 1);
 	float = helper.round(
 		helper.random.float(array.length - 1),
 		ROUND);
 
 	if(Math.random() >= 0.5)
 	{
-		int = -int;
-	}
-
-	if(Math.random() >= 0.5)
-	{
 		float = -float;
 	}
 
-	console.dir({
-		['[' + int + ']']: array[int],
+	curr = FloatingArray.getIndex(
+		Math.trunc(float), array.length);
+	next = (float < 0 ? curr - 1 : curr + 1);
+
+	console.dir({ curr, next,
+			CURR: array[curr],
+			NEXT: array[next],
 		['[' + float + ']']: helper.round(
 			array[float], 2)
 	}, { compact: false });

@@ -142,10 +142,10 @@ class FloatingArray extends Array
 				return _target[index];
 			}
 
-			return this.getValue(
-				_target[index],
-				_target[next],
-				float);
+			return (_target[index] +
+				(_target[next] -
+					_target[index]) *
+						float);
 		};
 
 		return result;
