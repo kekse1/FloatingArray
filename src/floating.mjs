@@ -90,6 +90,7 @@ class FloatingArray extends Array
 					_property, _target.radix);
 			const	negative = (index < 0),
 				float = (index % 1);
+			index = Math.trunc(index);
 			
 			if(_target.index)
 			{
@@ -109,7 +110,7 @@ class FloatingArray extends Array
 			{
 				return _target[index];
 			}
-
+			
 			var	next;
 
 			if(negative)
