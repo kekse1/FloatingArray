@@ -18,6 +18,7 @@ const	// default {options}; // etc...
 	RADIX_MIN = 2, RADIX_MAX = ALPHABET.length,
 	STRING_MAX = 64,
 
+	//
 	LOOKUP = (() => {
 		const result = new Uint8Array(256).fill(255);
 		for(var i = 0; i < ALPHABET.length; ++i)
