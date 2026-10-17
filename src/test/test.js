@@ -6,7 +6,7 @@
  */
 
 //
-import FloatingArray from './floating.mjs';
+import FloatingArray from '../floating.mjs';
 import helper from './helper.mjs';
 
 //

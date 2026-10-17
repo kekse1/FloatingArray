@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
  * https://kekse.biz/ https://github.com/kekse1/
- * v0.2.2
+ * v0.2.3
  */
 
 /*
@@ -25,14 +25,6 @@
  *
  */
 
-/*
- * TODO *
- *
- * # WICHTIG: `set()`-proxy-trap!!!! also setzen von werten mitsamt floating point index!!1
- *	dazu: 'set' ergaenzen in 'proxyTraps[]'!.
- *
- */
-
 //
 const	// default {options}; // etc...
 	RADIX = 10,
@@ -48,7 +40,7 @@ const	// default {options}; // etc...
 	LOOKUP = (() => {
 		const result = new Uint8Array(256).fill(255);
 		for(var i = 0; i < ALPHABET.length; ++i)
-			result[ALPHABET.charCodeAt(i)] = (i + 1);
+			result[ALPHABET.charCodeAt(i)] = i;
 		return result;
 	})();
 
@@ -85,31 +77,12 @@ class FloatingArray extends Array
 					this));
 	}
 
+	//
+	//TODO/this could be better.. still TODO!! ;-)
+	//
 	static getProxyTraps(_this)
 	{
-		//
 		const result = {};
-
-		//
-		result.apply = () => {
-
-		};
-
-		result.construct = () => {
-
-		};
-
-		result.defineProperty = () => {
-
-		};
-
-		result.deleteProperty = () => {
-
-		};
-
-		result.enumerate = () => {
-
-		};
 
 		result.get = (_target, _property, _receiver) => {
 			if(_property.length > STRING_MAX)
@@ -192,64 +165,9 @@ class FloatingArray extends Array
 				float);
 		};
 
-		result.getOwnPropertyDescriptor = () => {
-
-		};
-
-		result.getPrototypeOf = () => {
-
-		};
-
-		result.has = () => {
-
-		};
-
-		result.isExtensible = () => {
-
-		};
-
-		result.ownKeys = () => {
-
-		};
-
-		result.preventExtensions = () => {
-
-		};
-
-		result.set = () => {
-
-		};
-
-		result.setPrototypeOf = () => {
-
-		};
-
-		//
-		const proxyTraps = this.proxyTraps;
-
-		if(proxyTraps.length === 0)
-		{
-			result = {};
-		}
-		else for(const idx in result)
-		{
-			if(!proxyTraps.includes(idx))
-			{
-				delete result[idx];
-			}
-		}
-
-		//
 		return result;
 	}
 
-	static get proxyTraps()
-	{
-		return [
-			'get'
-		];
-	}
-	
 	static getParameter(_index)
 	{
 		const negative = (_index < 0);
@@ -315,21 +233,6 @@ class FloatingArray extends Array
 		return (_value >= RADIX_MIN && _value <= RADIX_MAX);
 	}
 	
-	static getAlphabet(_radix, _throw = FloatingArray.THROW)
-	{
-		if(!this.isRadix(_radix))
-		{
-			if(_throw)
-			{
-				throw new Error('Invalid radix');
-			}
-			
-			return null;
-		}
-		
-		return ALPHABET.substr(0, _radix);
-	}
-
 	parseNumber(_string, _radix = this.options.radix, _throw = FloatingArray.THROW)
 	{
 		return this.constructor.parseNumber(
@@ -343,7 +246,8 @@ class FloatingArray extends Array
 			return false;
 		}
 		
-		var	[ _string, radix ] = this.parseCast(_string);
+		var	[ string, radix ] = this.
+				parseCast(_string);
 		
 		if(radix === null)
 		{
@@ -360,6 +264,7 @@ class FloatingArray extends Array
 			return null;
 		}
 		
+		_string = _string.toLowerCase();
 		const	split = _string.split('.');
 		
 		if(split.length > 2)
@@ -398,7 +303,6 @@ class FloatingArray extends Array
 			}
 		}
 
-		const	alphabet = this.getAlphabet(radix);
 		var	result = 0,
 			negative,
 			mul = 1,
@@ -408,9 +312,9 @@ class FloatingArray extends Array
 		
 		for(var i = split[0].length - 1; i >= 0; --i)
 		{
-			index = alphabet.indexOf(split[0][i]);
+			index = LOOKUP[split[0].charCodeAt(i)];
 			
-			if(index === -1)
+			if((index + 1) > radix)
 			{
 				if(_throw)
 				{
@@ -440,9 +344,9 @@ class FloatingArray extends Array
 			
 			for(var i = 0; i < split[1].length; ++i)
 			{
-				index = alphabet.indexOf(split[1][i]);
+				index = LOOKUP[split[1].charCodeAt(i)];
 				
-				if(index === -1)
+				if((index + 1) > radix)
 				{
 					if(_throw)
 					{
@@ -463,7 +367,7 @@ class FloatingArray extends Array
 					return null;
 				}
 				
-				if((mul /= _radix) < Number.MIN_VALUE)
+				if((mul /= radix) < Number.MIN_VALUE)
 				{
 					if(_throw)
 					{
@@ -563,7 +467,9 @@ class FloatingArray extends Array
 			return true;
 		}
 		
-		var	[ string, radix ] = this.parseCast(_string);
+		_string = _string.toLowerCase();
+		var	[ string, radix ] = this.
+				parseCast(_string);
 
 		if(radix === null)
 		{
@@ -593,7 +499,7 @@ class FloatingArray extends Array
 		{
 			for(var i = 0; i < str.length; ++i)
 			{
-				if(LOOKUP[str.charCodeAt(i)] > radix)
+				if((LOOKUP[str.charCodeAt(i)] + 1) > radix)
 				{
 					return false;
 				}

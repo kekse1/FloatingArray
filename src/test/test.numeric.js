@@ -17,7 +17,7 @@
  */
 
 //
-import FloatingArray from './floating.mjs';
+import FloatingArray from '../floating.mjs';
 FloatingArray.THROW = false;
 
 //
@@ -27,7 +27,6 @@ result.getNumber = {};
 result.getParameter = {};
 
 result.isRadix = {};
-result.getAlphabet = {};
 
 result.parseNumber = {};
 result.parseCast = {};
@@ -62,18 +61,6 @@ result.getIndex = {};
 					isRadix(3.14);
 	result.isRadix['(-11)'] = FloatingArray.
 					isRadix(-11);
-})();
-
-//
-// getAlphabet();
-//
-(() => {
-	result.getAlphabet['(2)'] = FloatingArray.
-					getAlphabet(2);
-	result.getAlphabet['(16)'] = FloatingArray.
-					getAlphabet(16);
-	result.getAlphabet['(36)'] = FloatingArray.
-					getAlphabet(36);
 })();
 
 //
