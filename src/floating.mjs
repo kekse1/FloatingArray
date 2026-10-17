@@ -86,12 +86,12 @@ class FloatingArray extends Array
 				return undefined;
 			}
 			
-			_property = _target.parseNumber(
-				_property, _target.radix);
+			var	index = _target.parseNumber(
+					_property, _target.radix);
 			
-			const	negative = (_property < 0),
-				float = (_property % 1);
-			var	index = Math.trunc(_property);
+			const	negative = (index < 0),
+				float = (index % 1);
+			index = Math.trunc(index);
 			
 			if(_target.index)
 			{
