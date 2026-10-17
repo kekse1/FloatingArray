@@ -13,7 +13,7 @@ import helper from './helper.mjs';
 const
 	ROUND = 2,
 	COUNT = 8,
-	TEST = 6;
+	TEST = 8;
 
 //
 const	array = new FloatingArray(COUNT);
