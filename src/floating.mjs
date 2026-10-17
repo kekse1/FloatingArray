@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
  * https://kekse.biz/ https://github.com/kekse1/
- * v0.2.4
+ * v0.2.6
  */
 
 //
@@ -88,10 +88,8 @@ class FloatingArray extends Array
 			
 			var	index = _target.parseNumber(
 					_property, _target.radix);
-			
 			const	negative = (index < 0),
 				float = (index % 1);
-			index = Math.trunc(index);
 			
 			if(_target.index)
 			{
