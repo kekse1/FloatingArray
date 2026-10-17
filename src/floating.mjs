@@ -1,38 +1,19 @@
 /*
  * Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
  * https://kekse.biz/ https://github.com/kekse1/
- * v0.2.3
- */
-
-/*
- * JFYI: "PropJockey"[1] really had the same idea.
- * 	i didn't 'steal' it - never seen this
- * 	before when i had this idea! ;-)
- *
- * 		< https://github.com/propjockey/analog-array/ >
- *			[1] < https://github.com/propjockey/ >
- *
- * 	.. i know only one possible use case atm.; if
- * 	you have other ideas how to use this extension,
- * 	please mail me! :-)
- *
- * 		< kuchen@kekse.biz >
- *
- * 	And I'd be happy if you visit my private website or github.
- *
- *		< https://kekse.biz/ >
- *		< https://github.com/kekse1/ >
- *
+ * v0.2.4
  */
 
 //
 const	// default {options}; // etc...
 	RADIX = 10,
 	INDEX = true,
-
-	// see also "FloatingArray.THROW"!
-	THROW = true,
 	
+	//
+	THROW = true,
+	OVERRIDE = false,
+	
+	//
 	ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyz',
 	RADIX_MIN = 2, RADIX_MAX = ALPHABET.length,
 	STRING_MAX = 64,
@@ -50,10 +31,7 @@ class FloatingArray extends Array
 	constructor(... _args)
 	{
 		//
-		const options = {
-			index: INDEX,
-			radix: RADIX
-		};
+		const options = {};
 		
 		for(var i = 0; i < _args.length; ++i)
 		{
@@ -68,7 +46,12 @@ class FloatingArray extends Array
 		super(... _args);
 		
 		//
-		this.options = options;
+		this.options = Object.assign({
+			index: INDEX,
+			radix: RADIX,
+			override: OVERRIDE,
+			throw: this.constructor.THROW },
+				options);
 
 		//
 		return this.PROXY = new Proxy(
@@ -77,9 +60,6 @@ class FloatingArray extends Array
 					this));
 	}
 
-	//
-	//TODO/this could be better.. still TODO!! ;-)
-	//
 	static getProxyTraps(_this)
 	{
 		const result = {};
@@ -89,8 +69,13 @@ class FloatingArray extends Array
 			{
 				return _target[_property];
 			}
+			
+			if(!_target.override && (_property in _target))
+			{
+				return _target[_property];
+			}
 
-			if(!this.isNumber(_property, _target.radix, this.THROW))
+			if(!this.isNumber(_property, _target.radix, _target.throw))
 			{
 				return _target[_property];
 			}
@@ -100,7 +85,8 @@ class FloatingArray extends Array
 				return undefined;
 			}
 			
-			_property = _target.parseNumber(_property);
+			_property = _target.parseNumber(
+				_property, _target.radix);
 			
 			const	negative = (_property < 0);
 			
@@ -119,8 +105,8 @@ class FloatingArray extends Array
 				return undefined;
 			}
 
-			var	[ index, float ] = this.
-					getParameter(_property);
+			const	float = (_property % 1),
+				index = Math.trunc(_property);
 
 			if(!float)
 			{
@@ -131,7 +117,6 @@ class FloatingArray extends Array
 
 			if(negative)
 			{
-				float = (1 - float);
 				next = (index - 1);
 			}
 			else
@@ -151,7 +136,7 @@ class FloatingArray extends Array
 			if(!Number.isFinite(_target[index]) ||
 				!Number.isFinite(_target[next]))
 			{
-				if(this.THROW)
+				if(_target.throw)
 				{
 					throw new Error('At least one array element is no finite number');
 				}
@@ -168,16 +153,6 @@ class FloatingArray extends Array
 		return result;
 	}
 
-	static getParameter(_index)
-	{
-		const negative = (_index < 0);
-		_index = Math.abs(_index);
-		const floating = (_index % 1);
-		_index = Math.trunc(_index);
-		
-		return [ _index, floating, negative ];
-	}
-	
 	get index()
 	{
 		return this.options.index;
@@ -190,7 +165,7 @@ class FloatingArray extends Array
 			return this.options.index = _value;
 		}
 		
-		if(FloatingArray.THROW)
+		if(this.throw)
 		{
 			throw new Error('Expecting a Boolean');
 		}
@@ -210,12 +185,52 @@ class FloatingArray extends Array
 			return this.options.radix = _value;
 		}
 		
-		if(FloatingArray.THROW)
+		if(this.throw)
 		{
 			throw new Error('Invalid radix');
 		}
 		
 		return this.options.radix;
+	}
+	
+	get override()
+	{
+		return this.options.override;
+	}
+	
+	set override(_value)
+	{
+		if(typeof _value === 'boolean')
+		{
+			return this.options.override = _value;
+		}
+		
+		if(this.throw)
+		{
+			throw new Error('Expecting a Boolean');
+		}
+		
+		return this.options.override;
+	}
+	
+	get throw()
+	{
+		return this.options.throw;
+	}
+	
+	set throw(_value)
+	{
+		if(typeof _value === 'boolean')
+		{
+			return this.options.throw = _value;
+		}
+		
+		if(this.throw)
+		{
+			throw new Error('Expecting a Boolean');
+		}
+		
+		return this.options.throw;
 	}
 	
 	static isRadix(_value)
@@ -233,7 +248,7 @@ class FloatingArray extends Array
 		return (_value >= RADIX_MIN && _value <= RADIX_MAX);
 	}
 	
-	parseNumber(_string, _radix = this.options.radix, _throw = FloatingArray.THROW)
+	parseNumber(_string, _radix = this.options.radix, _throw = this.throw)
 	{
 		return this.constructor.parseNumber(
 				_string, _radix);
@@ -264,8 +279,8 @@ class FloatingArray extends Array
 			return null;
 		}
 		
-		_string = _string.toLowerCase();
-		const	split = _string.split('.');
+		string = string.toLowerCase();
+		const	split = string.split('.');
 		
 		if(split.length > 2)
 		{
@@ -316,6 +331,7 @@ class FloatingArray extends Array
 			
 			if((index + 1) > radix)
 			{
+	console.dir({index,split,radix});
 				if(_throw)
 				{
 					throw new Error('Invalid character[' + i + '] (`' +
@@ -386,6 +402,12 @@ class FloatingArray extends Array
 		
 		return result;
 	}
+	
+	parseCast(_string, _parse = false, _throw = this.throw)
+	{
+		return this.constructor.parseCast(
+			_string, _parse, _throw);
+	}
 
 	static parseCast(_string, _parse = false, _throw = FloatingArray.THROW)
 	{
@@ -439,10 +461,10 @@ class FloatingArray extends Array
 		return [ _string, radix ];
 	}
 
-	isNumber(_string, _radix = this.options.radix, _throw = FloatingArray.THROW)
+	isNumber(_string, _radix = this.options.radix, _throw = this.throw)
 	{
 		return this.constructor.isNumber(
-			_string, _radix, this.lookUpTable);
+			_string, _radix, _throw);
 	}
 	
 	static isNumber(_string, _radix = RADIX, _throw = FloatingArray.THROW)

@@ -32,7 +32,7 @@ are correct. And here should be some tiny documentation, too.
 <br><br>
 
 # Download
-* [**`floating.mjs`**](./src/floating.mjs), v**0.2.3** (updated **2026-10-17**);
+* [**`floating.mjs`**](./src/floating.mjs), v**0.2.4** (updated **2026-10-18**);
 
 <br>
 

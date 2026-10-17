@@ -77,6 +77,7 @@ result.getIndex = {};
 							parseNumber('(16)-ffff', 2);
 	result.parseNumber['(`1100101`, 2)'] = FloatingArray.
 							parseNumber('1100101', 2);
+//abc
 	result.parseNumber['(`1122121`, 2)'] = FloatingArray.
 							parseNumber('1122121', 2);
 	result.parseNumber['(`(3)1122121`, 2)'] = FloatingArray.
