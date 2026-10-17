@@ -30,8 +30,8 @@ part is finished now, the `Proxy` part is still TODO.. easy going.
 
 <br>
 
-* [`test.js`](./src/test/test.js) (TODO)
-* [`test.numeric.js`](./src/test/test.numeric.js) (DONE)
+* [`test.js`](./src/test/test.js)
+* [`test.numeric.js`](./src/test/test.numeric.js)
 
 <br><br>
 
