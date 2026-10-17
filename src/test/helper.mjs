@@ -24,11 +24,11 @@ helper.round = (_value, _prec = 0) => {
 helper.random = {};
 
 helper.random.float = (_max, _min = 0) => {
-	return (Math.random() * (_max - _min) + _min);
+	return (Math.random() * (_max - _min + 1) + _min);
 };
 
 helper.random.int = (_max, _min = 0) => {
-	return Math.floor(Math.random() * (_max - _min) + _min);
+	return Math.floor(Math.random() * (_max - _min + 1) + _min);
 };
 
 //

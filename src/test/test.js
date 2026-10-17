@@ -10,27 +10,30 @@ import FloatingArray from '../floating.mjs';
 import helper from './helper.mjs';
 
 //
-const ROUND = 2;
-const TEST = 8;
-const MAX = 255;
-const MIN = 0;
+const
+	ROUND = 2,
+	COUNT = 8,
+	TEST = 6;
 
 //
-const array = new FloatingArray(10);
-const result = [];
-var int, float;
+const	array = new FloatingArray(COUNT);
+var	float, int
 
 for(var i = 0; i < array.length; ++i)
 {
-	array[i] = ((Math.floor(Math.random() * (MAX - MIN + 1)) + MIN) || 0);
+	array[i] = helper.random.int(255);
 }
 
-console.dir({array}, {compact:false});
+console.dir(
+	{ array },
+	{ compact: false });
 
 for(var i = 0; i < TEST; ++i)
 {
-	int = helper.random.int(array.length);
-	float = helper.random.float(array.length);
+	int = helper.random.int(array.length - 1);
+	float = helper.round(
+		helper.random.float(array.length - 1),
+		ROUND);
 
 	if(Math.random() >= 0.5)
 	{
@@ -42,10 +45,11 @@ for(var i = 0; i < TEST; ++i)
 		float = -float;
 	}
 
-	console.dir({ int, float,
-		INT: array[int],
-		FLOAT: array[float] },
-			{ compact: false });
+	console.dir({
+		['[' + int + ']']: array[int],
+		['[' + float + ']']: helper.round(
+			array[float], 2)
+	}, { compact: false });
 	console.log();
 }
 
