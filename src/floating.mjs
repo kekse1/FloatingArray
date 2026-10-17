@@ -89,25 +89,23 @@ class FloatingArray extends Array
 			_property = _target.parseNumber(
 				_property, _target.radix);
 			
-			const	negative = (_property < 0);
+			const	negative = (_property < 0),
+				float = (_property % 1);
+			var	index = Math.trunc(_property);
 			
 			if(_target.index)
 			{
-				_property = this.getIndex(
-					_property,
-					_target.length);
+				index = this.getIndex(
+					index, _target.length);
 			}
-			else if(_property < 0)
+			else if(index < 0)
 			{
 				return undefined;
 			}
-			else if(_property >= _target.length)
+			else if(index >= _target.length)
 			{
 				return undefined;
 			}
-
-			const	float = (_property % 1),
-				index = Math.trunc(_property);
 
 			if(!float)
 			{
