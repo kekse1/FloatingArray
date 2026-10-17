@@ -75,7 +75,7 @@ class FloatingArray extends Array
 				return _target[_property];
 			}
 
-			if(!this.isNumber(_property, _target.radix, _target.throw))
+			if(!_target.isNumber(_property, _target.radix, _target.throw))
 			{
 				return _target[_property];
 			}
