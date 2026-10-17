@@ -10,6 +10,14 @@ I had never seen it somewhere else before! :-)
 
 So, please also look at < https://github.com/propjockey/analog-array/ >.
 
+<br>
+
+> [!TIP]
+> **This** is my most efficient implementation for radix conversion.
+> The first time I've used a **lookup table** (`Uint8Array`). I will
+> do the same thing everywhere else in my codes.. will take some time,
+> even if it's really just a tiny thing.
+
 <br><br>
 
 # TODO
