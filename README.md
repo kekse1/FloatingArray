@@ -24,6 +24,11 @@ So, please also look at < https://github.com/propjockey/analog-array/ >.
 Most parts should work. But I still have to test if my calculations
 are correct. And here should be some tiny documentation, too.
 
+<br>
+
+> [!WARN]
+> Still working on the lerp code... please be patient
+
 <br><br>
 
 # Idea and Description
