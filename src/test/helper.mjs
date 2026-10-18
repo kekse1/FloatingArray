@@ -20,5 +20,7 @@ helper.random.int = (_max, _min = 0) => {
 	return Math.floor(Math.random() * (_max - _min + 1) + _min);
 };
 
+helper.random.bool = () => (Math.random() >= 0.5);
+
 //
 

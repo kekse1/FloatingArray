@@ -31,7 +31,7 @@ for(var i = 0; i < TEST; ++i)
 {
 	float = helper.random.float(array.length - 1);
 
-	if(Math.random() >= 0.5)
+	if(helper.random.bool())
 	{
 		float = -float;
 	}
