@@ -23,8 +23,7 @@ Short explaination: Extends a regular (JavaScript) Array, using a Proxy for own
 * Floating Point Index: calculates the middle between both numeric values.
 * Negative indices counted from the arrays ends (and calculating backwards).
 * Also optional Modulo for the indices, to repeat counting after ends/beginnings.
-* "Radix cast" (my invention), so access via e.g. `array['(16)-ff.ff']` or
-* `(2)10101.10101` is possible.
+* "Radix cast" (my invention): access via `array['(16)-ff.ff']` or `(2)10101.10101`..
 
 For sure, JavaScript supports a higher radix. But only for integer values - you
 can't use smth. like `parseFloat('ff.ff', 16)`.
