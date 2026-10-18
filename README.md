@@ -19,6 +19,14 @@ But still missing some more documentation here.
 # Idea and Description
 **TODO**
 
+Short explaination: Extends a regular (JavaScript) Array, using a Proxy for own
+`get()` (Proxy Trap) access to the array values via:
+
+* Floating Point Index: to calculate the middle between both numeric values
+* Negative values counted from the arrays ends
+* Modulo to repeat counting after reaching arrays ends
+* Radix "cast" parsing, so access via e.g. `array['(16)-ffff']`.
+
 <br><br>
 
 # Download
