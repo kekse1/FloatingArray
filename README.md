@@ -22,9 +22,9 @@ But still missing some more documentation here.
 Short explaination: Extends a regular (JavaScript) Array, using a Proxy for own
 `get()` (Proxy Trap) access to the array values via:
 
-* Floating Point Index: to calculate the middle between both numeric values
-* Negative values counted from the arrays ends
-* Modulo to repeat counting after reaching arrays ends
+* Floating Point Index: calculates the middle between both numeric values.
+* Negative values counted from the arrays ends (and calculating backwards).
+* Modulo the index, to repeat counting after reaching array ends/beginnings.
 * Radix "cast" parsing, so access via e.g. `array['(16)-ffff']`.
 
 <br><br>
