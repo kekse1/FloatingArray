@@ -129,15 +129,21 @@ class FloatingArray extends Array
 				
 				return _target[index];
 			}
-
-			return (_target[index] +
-				(_target[next] - _target[index]) *
-							float);
+			
+			return this.getValue(
+				_target[index],
+				_target[next],
+				float);
 		};
 
 		return result;
 	}
 
+	static getValue(_curr, _next, _float)
+	{
+		return (_curr + (_next - _curr) * _float);
+	}
+	
 	get index()
 	{
 		return this.options.index;
@@ -538,11 +544,6 @@ class FloatingArray extends Array
 		}
 		
 		return [ _string, negative ];
-	}
-
-	static getValue(_a, _b, _factor)
-	{
-		return ((((_a - _b) * _factor) + _b) || 0);
 	}
 	
 	static getIndex(_index, _length)
