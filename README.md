@@ -48,7 +48,7 @@ at the `constructor(... _args)` to see how they're applied.
 <br><br>
 
 # Download
-* [**`floating.mjs`**](./src/floating.mjs), v**0.2.8** (updated **2026-10-18**);
+* [**`floating.mjs`**](./src/floating.mjs), v**0.2.9** (updated **2026-10-18**);
 
 **Test cases** [**here**](./src/test/)
 

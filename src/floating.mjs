@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
  * https://kekse.biz/ https://github.com/kekse1/
- * v0.2.8
+ * v0.2.9
  */
 
 //
@@ -360,38 +360,42 @@ class FloatingArray extends Array
 
 		var	result = 0,
 			negative,
-			mul = 1,
-			index;
+			index,
+			mul;
 		
 		[ split[0], negative ] = this.parseSign(split[0]);
 		
-		for(var i = split[0].length - 1; i >= 0; --i)
+		if(split[0])
 		{
-			index = LOOKUP[split[0].charCodeAt(i)];
+			mul = 1;
 			
-			if((index + 1) > radix)
+			for(var i = split[0].length - 1; i >= 0; --i)
 			{
-	console.dir({index,split,radix});
-				if(_throw)
-				{
-					throw new Error('Invalid character[' + i + '] (`' +
-						split[0][i] + '`) in string');
-				}
-				
-				return null;
-			}
+				index = LOOKUP[split[0].charCodeAt(i)];
 			
-			if((result += (mul * index)) > Number.MAX_SAFE_INTEGER)
-			{
-				if(_throw)
+				if((index + 1) > radix)
 				{
-					throw new Error('Number exceeds limit (' + Number.MAX_SAFE_INTEGER + ')');
-				}
+					if(_throw)
+					{
+						throw new Error('Invalid character[' + i + '] (`' +
+							split[0][i] + '`) in string');
+					}
 				
-				return null;
-			}
+					return null;
+				}
 			
-			mul *= radix;
+				if((result += (mul * index)) > Number.MAX_SAFE_INTEGER)
+				{
+					if(_throw)
+					{
+						throw new Error('Number exceeds limit (' + Number.MAX_SAFE_INTEGER + ')');
+					}
+				
+					return null;
+				}
+			
+				mul *= radix;
+			}
 		}
 		
 		if(split[1])
