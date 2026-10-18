@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
  * https://kekse.biz/ https://github.com/kekse1/
- * v0.2.6
+ * v0.2.7
  */
 
 //
@@ -86,22 +86,18 @@ class FloatingArray extends Array
 				return undefined;
 			}
 			
-			var	index = _target.parseNumber(
-					_property, _target.radix);
-			const	negative = (index < 0),
-				float = (index % 1);
-			index = Math.trunc(index);
-			
+			_property = _target.parseNumber(
+				_property, _target.radix);
+			const	negative = (_property < 0);
+			var	index = Math.trunc(_property);
+			const	float = Math.abs(_property % 1);
+
 			if(_target.index)
 			{
-				index = this.getIndex(
-					index, _target.length);
+				index = this.getIndex(index,
+						_target.length);
 			}
-			else if(index < 0)
-			{
-				return undefined;
-			}
-			else if(index >= _target.length)
+			else if(index < 0 || index >= _target.length)
 			{
 				return undefined;
 			}
@@ -112,7 +108,7 @@ class FloatingArray extends Array
 			}
 			
 			var	next;
-
+			
 			if(negative)
 			{
 				next = (index - 1);
@@ -121,15 +117,8 @@ class FloatingArray extends Array
 			{
 				next = (index + 1);
 			}
-
-			if(next < 0)
-			{
-				next = (_target.length - 1);
-			}
-			else if(next >= _target.length)
-			{
-				next = 0;
-			}
+			
+			next = this.getIndex(next, _target.length);
 
 			if(!Number.isFinite(_target[index]) || !Number.isFinite(_target[next]))
 			{
@@ -142,9 +131,8 @@ class FloatingArray extends Array
 			}
 
 			return (_target[index] +
-				(_target[next] -
-					_target[index]) *
-						float);
+				(_target[next] - _target[index]) *
+							float);
 		};
 
 		return result;

@@ -24,11 +24,6 @@ So, please also look at < https://github.com/propjockey/analog-array/ >.
 Most parts should work. But I still have to test if my calculations
 are correct. And here should be some tiny documentation, too.
 
-<br>
-
-> [!WARN]
-> Still working on the lerp code... please be patient
-
 <br><br>
 
 # Idea and Description
@@ -37,7 +32,7 @@ are correct. And here should be some tiny documentation, too.
 <br><br>
 
 # Download
-* [**`floating.mjs`**](./src/floating.mjs), v**0.2.6** (updated **2026-10-18**);
+* [**`floating.mjs`**](./src/floating.mjs), v**0.2.7** (updated **2026-10-18**);
 
 <br>
 
