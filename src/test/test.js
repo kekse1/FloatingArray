@@ -11,7 +11,6 @@ import helper from './helper.mjs';
 
 //
 const
-	ROUND = 2,
 	COUNT = 8,
 	TEST = 8;
 
@@ -30,9 +29,7 @@ console.dir(
 
 for(var i = 0; i < TEST; ++i)
 {
-	float = helper.round(
-		helper.random.float(array.length - 1),
-		ROUND);
+	float = helper.random.float(array.length - 1);
 
 	if(Math.random() >= 0.5)
 	{
@@ -46,9 +43,9 @@ for(var i = 0; i < TEST; ++i)
 	console.dir({ curr, next,
 			CURR: array[curr],
 			NEXT: array[next],
-		['[' + float + ']']: helper.round(
-			array[float], 2)
-	}, { compact: false });
+		['[' + float + ']']:
+			array[float] },
+		{ compact: false });
 	console.log();
 }
 

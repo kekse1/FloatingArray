@@ -1,13 +1,15 @@
 /*
  * Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
  * https://kekse.biz/ https://github.com/kekse1/
- * v0.2.7
+ * v0.2.8
  */
 
 //
 const	// default {options}; // etc...
-	RADIX = 10,
-	INDEX = true,
+	RADIX = 10,	// the default... see also "parseCast()"
+	INDEX = true,	// siehe "getIndex()"
+	ROUND = 0,	// NO rounding at all via (null) or negative values
+			// and (0) if you'd like to use byte values, e.g...
 	
 	//
 	THROW = true,
@@ -50,6 +52,7 @@ class FloatingArray extends Array
 		this.options = Object.assign({
 			index: INDEX,
 			radix: RADIX,
+			round: ROUND,
 			override: OVERRIDE,
 			throw: this.constructor.THROW },
 				options);
@@ -130,10 +133,11 @@ class FloatingArray extends Array
 				return _target[index];
 			}
 			
-			return this.getValue(
-				_target[index],
-				_target[next],
-				float);
+			return this.round(this.getValue(
+					_target[index],
+					_target[next],
+					float),
+				_target.round);
 		};
 
 		return result;
@@ -142,6 +146,51 @@ class FloatingArray extends Array
 	static getValue(_curr, _next, _float)
 	{
 		return (_curr + (_next - _curr) * _float);
+	}
+
+	static round(_value, _precision = 0)
+	{
+		if(_precision < 0 || _precision === null)
+		{
+			return _value;
+		}
+		
+		const factor = Math.pow(10, _precision);
+		return ((Math.round(_value * factor) / factor) || 0);
+	}
+	
+	get round()
+	{
+		return this.options.round;
+	}
+	
+	set round(_value)
+	{
+		if(_value < 0 || _value === null)
+		{
+			return this.options.round = null;
+		}
+		else if(Number.isFinite(_value))
+		{
+			if((_value % 1) !== 0)
+			{
+				if(this.throw)
+				{
+					throw new Error('Expecting a finite integer value');
+				}
+				
+				return this.options.round;
+			}
+			
+			return this.options.round = _value;
+		}
+		
+		if(this.throw)
+		{
+			throw new Error('Expecting (null) or a positive, finite integer');
+		}
+		
+		return this.options.round;
 	}
 	
 	get index()

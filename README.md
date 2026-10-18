@@ -2,13 +2,9 @@
 <img src="https://kekse.biz/github.php?draw&override=github:FloatingArray" />
 
 # **`FloatingArray`**
-**TODO**
+Now \(**2026-10-18**\) it's done and working.
 
-[PropJockey](https://github.com/propjockey/) had exactly the same idea as me.
-I really didn't steal this idea from her - when it came up to my mind,
-I had never seen it somewhere else before! :-)
-
-So, please also look at < https://github.com/propjockey/analog-array/ >.
+But still missing some more documentation here.
 
 <br>
 
@@ -20,29 +16,30 @@ So, please also look at < https://github.com/propjockey/analog-array/ >.
 
 <br><br>
 
-# TODO
-Most parts should work. But I still have to test if my calculations
-are correct. And here should be some tiny documentation, too.
-
-<br><br>
-
 # Idea and Description
 **TODO**
 
 <br><br>
 
 # Download
-* [**`floating.mjs`**](./src/floating.mjs), v**0.2.7** (updated **2026-10-18**);
+* [**`floating.mjs`**](./src/floating.mjs), v**0.2.8** (updated **2026-10-18**);
 
-<br>
-
-* [`test.js`](./src/test/test.js)
-* [`test.numeric.js`](./src/test/test.numeric.js)
+**Test cases** [**here**](./src/test/)
 
 <br><br>
 
 # TODO
 ...
+
+<br><br>
+
+# By the way. ..
+
+[PropJockey](https://propjockey.io/) had exactly the same idea as me.
+I really didn't steal this idea from her - when it came up to my mind,
+I had never seen it somewhere else before! :-)
+
+So, please also look at her [`analog-array`](https://github.com/propjockey/analog-array/)!
 
 <br><br><br>
 
