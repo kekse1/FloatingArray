@@ -23,9 +23,12 @@ Short explaination: Extends a regular (JavaScript) Array, using a Proxy for own
 `get()` (Proxy Trap) access to the array values via:
 
 * Floating Point Index: calculates the middle between both numeric values.
-* Negative values counted from the arrays ends (and calculating backwards).
-* Modulo the index, to repeat counting after reaching array ends/beginnings.
-* Radix "cast" parsing, so access via e.g. `array['(16)-ffff']`.
+* Negative indices counted from the arrays ends (and calculating backwards).
+* Also optional Modulo for the indices, to repeat counting after ends/beginnings.
+* "Radix cast" (my invention), so access via e.g. `array['(16)-ffff']` is possible.
+
+For sure, JavaScript supports a higher radix. But only for integer values - you
+can't use smth. like `parseFloat('ff.ff', 16)`.
 
 <br><br>
 
