@@ -20,16 +20,14 @@ But still missing some more documentation here.
 Short explaination: Extends a regular (JavaScript) Array, using a Proxy for own
 `get()` (Proxy Trap) access to the array values via:
 
-* Floating Point Index: calculates the middle between both numeric values.
-* Negative indices counted from the arrays ends (and calculating backwards).
-* Also optional Modulo for the indices, to repeat counting after ends/beginnings.
-* "Radix cast" (my invention): access via `array['(16)-ff.ff']` or `(2)10101.10101`..
+* Floating Point Index: calculates the middle between both numeric values
+* Negative indices counted from the arrays ends (and calculating backwards)
+* Also optional Modulo for the indices, to repeat counting after ends/beginnings
+* "Radix cast" (my invention): access via `array['(16)-ff.ff']` or `(2)10101.10101`
 
 For sure, JavaScript supports a higher radix. But only for integer values - you
-can't use smth. like `parseFloat('ff.ff', 16)`.
-
-.. because, of course: The **main idea** was to access numeric array values
-"**in between**"! Used formula/function is this one:
+can't use smth. like `parseFloat('ff.ff', 16)`. .. because, of course:
+The **main idea** was to access numeric array values "**in between**":
 
 ```
 static getValue(_curr, _next, _float)
