@@ -11,7 +11,7 @@ But still missing some more documentation here.
 > [!TIP]
 > **This** includes my most efficient implementation of **radix conversion.**
 > The first time I've used a **lookup table** (`Uint8Array`). I will
-> do the same thing everywhere else in my codes.. will take some time,
+> do it the same thing everywhere else in my codes.. will take some time,
 > even if it's really just a tiny thing.
 
 <br><br>
