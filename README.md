@@ -17,8 +17,6 @@ But still missing some more documentation here.
 <br><br>
 
 # Idea and Description
-**TODO**
-
 Short explaination: Extends a regular (JavaScript) Array, using a Proxy for own
 `get()` (Proxy Trap) access to the array values via:
 
@@ -29,6 +27,22 @@ Short explaination: Extends a regular (JavaScript) Array, using a Proxy for own
 
 For sure, JavaScript supports a higher radix. But only for integer values - you
 can't use smth. like `parseFloat('ff.ff', 16)`.
+
+.. because, of course: The **main idea** was to access numeric array values "in
+between" 'em! Used formula/function is this one:
+
+```
+static getValue(_curr, _next, _float)
+{
+    return ((_curr + (_next - _curr) * _float) || 0);
+}
+```
+
+<br><br>
+
+## Settings / Options
+See the `const` **defaults** on top of [the script](./src/floating.mjs), and look
+at the `constructor(... _args)` to see how they're applied.
 
 <br><br>
 

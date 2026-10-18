@@ -145,7 +145,7 @@ class FloatingArray extends Array
 
 	static getValue(_curr, _next, _float)
 	{
-		return (_curr + (_next - _curr) * _float);
+		return ((_curr + (_next - _curr) * _float) || 0);
 	}
 
 	static round(_value, _precision = 0)
