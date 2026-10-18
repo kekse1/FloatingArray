@@ -28,8 +28,8 @@ Short explaination: Extends a regular (JavaScript) Array, using a Proxy for own
 For sure, JavaScript supports a higher radix. But only for integer values - you
 can't use smth. like `parseFloat('ff.ff', 16)`.
 
-.. because, of course: The **main idea** was to access numeric array values "in
-between" 'em! Used formula/function is this one:
+.. because, of course: The **main idea** was to access numeric array values
+"**in between**"! Used formula/function is this one:
 
 ```
 static getValue(_curr, _next, _float)
